@@ -169,13 +169,85 @@
       min-width: 220px;
     }
 
+    #joystick-container {
+      position: relative;
+      width: 200px;
+      height: 200px;
+      margin: 0 auto 15px;
+    }
+
+    #joystick-base {
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(29, 78, 216, 0.3), rgba(29, 78, 216, 0.6));
+      border: 4px solid #3b82f6;
+      box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.3);
+    }
+
+    #joystick-stick {
+      position: absolute;
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #facc15, #f59e0b);
+      border: 4px solid #fbbf24;
+      box-shadow: 0 4px 15px rgba(250, 204, 21, 0.6);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      cursor: pointer;
+      touch-action: none;
+      transition: box-shadow 0.1s;
+    }
+
+    #joystick-stick:active {
+      box-shadow: 0 2px 8px rgba(250, 204, 21, 0.8);
+    }
+
+    #joystick-stick::before {
+      content: '🎮';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 28px;
+    }
+
+    .joystick-direction {
+      position: absolute;
+      font-size: 20px;
+      color: #94a3b8;
+      opacity: 0.5;
+    }
+
+    .joystick-up {
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .joystick-down {
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .joystick-left {
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .joystick-right {
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
     #dpad {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      grid-template-rows: 1fr 1fr 1fr;
-      gap: 8px;
-      max-width: 200px;
-      margin: 0 auto;
+      display: none;
     }
 
     .dpad-btn {
@@ -398,15 +470,27 @@
         order: 2;
       }
 
-      #dpad {
-        gap: 6px;
-        max-width: 180px;
+      #joystick-container {
+        width: 180px;
+        height: 180px;
       }
 
-      .dpad-btn {
-        width: 55px;
-        height: 55px;
-        font-size: 22px;
+      #joystick-base {
+        width: 180px;
+        height: 180px;
+      }
+
+      #joystick-stick {
+        width: 70px;
+        height: 70px;
+      }
+
+      #joystick-stick::before {
+        font-size: 24px;
+      }
+
+      .joystick-direction {
+        font-size: 18px;
       }
 
       .action-buttons {
@@ -430,14 +514,27 @@
         font-size: 16px;
       }
 
-      #dpad {
-        max-width: 160px;
+      #joystick-container {
+        width: 160px;
+        height: 160px;
       }
 
-      .dpad-btn {
-        width: 48px;
-        height: 48px;
-        font-size: 20px;
+      #joystick-base {
+        width: 160px;
+        height: 160px;
+      }
+
+      #joystick-stick {
+        width: 60px;
+        height: 60px;
+      }
+
+      #joystick-stick::before {
+        font-size: 22px;
+      }
+
+      .joystick-direction {
+        font-size: 16px;
       }
 
       .stat-label {
@@ -496,6 +593,10 @@
         order: 1;
       }
 
+      #fullscreen-btn {
+        width: 100%;
+      }
+
       .power-mini {
         padding: 5px;
         font-size: 9px;
@@ -521,20 +622,32 @@
       }
 
       #controls-mobile {
-        max-width: 200px;
+        max-width: 180px;
         padding: 8px;
         order: 3;
       }
 
-      #dpad {
-        gap: 4px;
-        max-width: 150px;
+      #joystick-container {
+        width: 140px;
+        height: 140px;
       }
 
-      .dpad-btn {
-        width: 45px;
-        height: 45px;
-        font-size: 18px;
+      #joystick-base {
+        width: 140px;
+        height: 140px;
+      }
+
+      #joystick-stick {
+        width: 55px;
+        height: 55px;
+      }
+
+      #joystick-stick::before {
+        font-size: 20px;
+      }
+
+      .joystick-direction {
+        font-size: 14px;
       }
 
       .action-btn {
@@ -615,7 +728,18 @@
 
     <!-- Contrôles à droite -->
     <div id="controls-mobile">
-      <div id="dpad">
+      <div id="joystick-container">
+        <div id="joystick-base">
+          <span class="joystick-direction joystick-up">▲</span>
+          <span class="joystick-direction joystick-down">▼</span>
+          <span class="joystick-direction joystick-left">◄</span>
+          <span class="joystick-direction joystick-right">►</span>
+        </div>
+        <div id="joystick-stick"></div>
+      </div>
+
+      <!-- Ancien dpad caché -->
+      <div id="dpad" style="display: none;">
         <button class="dpad-btn" id="up-btn">▲</button>
         <button class="dpad-btn" id="left-btn">◄</button>
         <button class="dpad-btn center" id="pause-btn">⏸</button>
@@ -624,6 +748,7 @@
       </div>
 
       <div class="action-buttons">
+        <button class="action-btn" id="pause-btn-new">⏸ Pause</button>
         <button class="action-btn" id="restart-btn">🔄</button>
       </div>
     </div>
@@ -1355,75 +1480,115 @@
       requestAnimationFrame(loop);
     }
 
-    // Contrôles tactiles et souris
-    const upBtn = document.getElementById('up-btn');
-    const downBtn = document.getElementById('down-btn');
-    const leftBtn = document.getElementById('left-btn');
-    const rightBtn = document.getElementById('right-btn');
-    const pauseBtn = document.getElementById('pause-btn');
+    // Joystick virtuel
+    const joystickContainer = document.getElementById('joystick-container');
+    const joystickStick = document.getElementById('joystick-stick');
+    const joystickBase = document.getElementById('joystick-base');
+    
+    let joystickActive = false;
+    let joystickCenterX = 0;
+    let joystickCenterY = 0;
+    const maxDistance = 60; // Distance maximale du stick depuis le centre
+
+    function initJoystick() {
+      const rect = joystickBase.getBoundingClientRect();
+      joystickCenterX = rect.left + rect.width / 2;
+      joystickCenterY = rect.top + rect.height / 2;
+    }
+
+    function handleJoystickStart(e) {
+      e.preventDefault();
+      joystickActive = true;
+      initJoystick();
+      updateJoystick(e);
+      if (gameOver) { lives = 3; init(); }
+    }
+
+    function handleJoystickMove(e) {
+      if (!joystickActive) return;
+      e.preventDefault();
+      updateJoystick(e);
+    }
+
+    function handleJoystickEnd(e) {
+      e.preventDefault();
+      joystickActive = false;
+      // Retour au centre avec animation
+      joystickStick.style.transition = 'all 0.2s ease-out';
+      joystickStick.style.transform = 'translate(-50%, -50%)';
+      setTimeout(() => {
+        joystickStick.style.transition = '';
+      }, 200);
+    }
+
+    function updateJoystick(e) {
+      const touch = e.touches ? e.touches[0] : e;
+      const deltaX = touch.clientX - joystickCenterX;
+      const deltaY = touch.clientY - joystickCenterY;
+      
+      const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+      const angle = Math.atan2(deltaY, deltaX);
+      
+      // Limiter la distance
+      const limitedDistance = Math.min(distance, maxDistance);
+      const x = Math.cos(angle) * limitedDistance;
+      const y = Math.sin(angle) * limitedDistance;
+      
+      // Déplacer le stick
+      joystickStick.style.transform = `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`;
+      
+      // Déterminer la direction (avec zone morte)
+      if (distance > 20) {
+        const degrees = angle * (180 / Math.PI);
+        
+        // Droite: -45° à 45°
+        if (degrees >= -45 && degrees < 45) {
+          pacman.nextDir = { x: 1, y: 0 };
+        }
+        // Bas: 45° à 135°
+        else if (degrees >= 45 && degrees < 135) {
+          pacman.nextDir = { x: 0, y: 1 };
+        }
+        // Gauche: 135° à -135°
+        else if (degrees >= 135 || degrees < -135) {
+          pacman.nextDir = { x: -1, y: 0 };
+        }
+        // Haut: -135° à -45°
+        else {
+          pacman.nextDir = { x: 0, y: -1 };
+        }
+      }
+    }
+
+    // Events tactiles pour le joystick
+    joystickStick.addEventListener('touchstart', handleJoystickStart);
+    joystickStick.addEventListener('touchmove', handleJoystickMove);
+    joystickStick.addEventListener('touchend', handleJoystickEnd);
+    
+    // Events souris pour le joystick (desktop)
+    joystickStick.addEventListener('mousedown', handleJoystickStart);
+    document.addEventListener('mousemove', handleJoystickMove);
+    document.addEventListener('mouseup', handleJoystickEnd);
+
+    // Réinitialiser le centre du joystick lors du redimensionnement
+    window.addEventListener('resize', initJoystick);
+    initJoystick();
+
+    // Boutons Pause et Restart
+    const pauseBtnNew = document.getElementById('pause-btn-new');
     const restartBtn = document.getElementById('restart-btn');
 
-    // Bouton Haut
-    upBtn.addEventListener('touchstart', (e) => {
-      e.preventDefault();
-      pacman.nextDir = { x: 0, y: -1 };
-      if (gameOver) { lives = 3; init(); }
-    });
-    upBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      pacman.nextDir = { x: 0, y: -1 };
-      if (gameOver) { lives = 3; init(); }
-    });
-
-    // Bouton Bas
-    downBtn.addEventListener('touchstart', (e) => {
-      e.preventDefault();
-      pacman.nextDir = { x: 0, y: 1 };
-      if (gameOver) { lives = 3; init(); }
-    });
-    downBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      pacman.nextDir = { x: 0, y: 1 };
-      if (gameOver) { lives = 3; init(); }
-    });
-
-    // Bouton Gauche
-    leftBtn.addEventListener('touchstart', (e) => {
-      e.preventDefault();
-      pacman.nextDir = { x: -1, y: 0 };
-      if (gameOver) { lives = 3; init(); }
-    });
-    leftBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      pacman.nextDir = { x: -1, y: 0 };
-      if (gameOver) { lives = 3; init(); }
-    });
-
-    // Bouton Droite
-    rightBtn.addEventListener('touchstart', (e) => {
-      e.preventDefault();
-      pacman.nextDir = { x: 1, y: 0 };
-      if (gameOver) { lives = 3; init(); }
-    });
-    rightBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      pacman.nextDir = { x: 1, y: 0 };
-      if (gameOver) { lives = 3; init(); }
-    });
-
-    // Bouton Pause
-    pauseBtn.addEventListener('touchstart', (e) => {
+    pauseBtnNew.addEventListener('click', (e) => {
       e.preventDefault();
       paused = !paused;
       pauseOverlay.classList.toggle('active', paused);
     });
-    pauseBtn.addEventListener('click', (e) => {
+    pauseBtnNew.addEventListener('touchstart', (e) => {
       e.preventDefault();
       paused = !paused;
       pauseOverlay.classList.toggle('active', paused);
     });
 
-    // Bouton Recommencer
     restartBtn.addEventListener('touchstart', (e) => {
       e.preventDefault();
       score = 0;
