@@ -326,6 +326,343 @@
       background: linear-gradient(135deg, #22c55e, #4ade80);
     }
 
+    /* Menu de personnalisation */
+    #customization-menu {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      overflow-y: auto;
+    }
+
+    #customization-menu.active {
+      display: flex;
+    }
+
+    .menu-content {
+      background: linear-gradient(135deg, #1e293b, #0f172a);
+      border-radius: 20px;
+      padding: 30px;
+      max-width: 600px;
+      width: 90%;
+      max-height: 90vh;
+      overflow-y: auto;
+      border: 3px solid #3b82f6;
+      box-shadow: 0 0 40px rgba(59, 130, 246, 0.5);
+    }
+
+    .menu-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .menu-title {
+      font-size: 24px;
+      color: #facc15;
+      text-shadow: 0 0 10px #facc15;
+    }
+
+    .close-btn {
+      background: #ef4444;
+      border: none;
+      color: white;
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 20px;
+      transition: all 0.2s;
+    }
+
+    .close-btn:hover {
+      background: #dc2626;
+      transform: scale(1.1);
+    }
+
+    .menu-section {
+      margin-bottom: 25px;
+    }
+
+    .section-title {
+      font-size: 18px;
+      color: #3b82f6;
+      margin-bottom: 15px;
+      border-bottom: 2px solid #1d4ed8;
+      padding-bottom: 8px;
+    }
+
+    /* Skins */
+    .skins-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+      gap: 10px;
+    }
+
+    .skin-item {
+      background: rgba(29, 78, 216, 0.2);
+      border: 3px solid #1d4ed8;
+      border-radius: 12px;
+      padding: 15px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s;
+      position: relative;
+    }
+
+    .skin-item:hover {
+      transform: scale(1.05);
+      border-color: #3b82f6;
+      box-shadow: 0 0 15px rgba(59, 130, 246, 0.5);
+    }
+
+    .skin-item.active {
+      border-color: #facc15;
+      background: rgba(250, 204, 21, 0.2);
+      box-shadow: 0 0 20px rgba(250, 204, 21, 0.6);
+    }
+
+    .skin-item.locked {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .skin-icon {
+      font-size: 36px;
+      margin-bottom: 5px;
+    }
+
+    .skin-name {
+      font-size: 11px;
+      color: #94a3b8;
+    }
+
+    .skin-item.active .skin-name {
+      color: #facc15;
+      font-weight: bold;
+    }
+
+    .lock-icon {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      font-size: 14px;
+    }
+
+    /* Thèmes */
+    .themes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 10px;
+    }
+
+    .theme-item {
+      background: rgba(29, 78, 216, 0.2);
+      border: 3px solid #1d4ed8;
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .theme-item:hover {
+      transform: scale(1.05);
+      border-color: #3b82f6;
+    }
+
+    .theme-item.active {
+      border-color: #facc15;
+      background: rgba(250, 204, 21, 0.2);
+      box-shadow: 0 0 20px rgba(250, 204, 21, 0.6);
+    }
+
+    .theme-preview {
+      width: 100%;
+      height: 60px;
+      border-radius: 8px;
+      margin-bottom: 8px;
+    }
+
+    .theme-name {
+      font-size: 13px;
+      color: #e5e7eb;
+      font-weight: bold;
+    }
+
+    /* Succès */
+    .achievements-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .achievement-item {
+      background: rgba(29, 78, 216, 0.2);
+      border: 2px solid #1d4ed8;
+      border-radius: 12px;
+      padding: 15px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      transition: all 0.2s;
+    }
+
+    .achievement-item.unlocked {
+      border-color: #22c55e;
+      background: rgba(34, 197, 94, 0.2);
+      box-shadow: 0 0 15px rgba(34, 197, 94, 0.3);
+    }
+
+    .achievement-icon {
+      font-size: 36px;
+      min-width: 50px;
+      text-align: center;
+    }
+
+    .achievement-item.unlocked .achievement-icon {
+      animation: bounce 0.5s;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+    }
+
+    .achievement-info {
+      flex: 1;
+    }
+
+    .achievement-name {
+      font-size: 15px;
+      color: #facc15;
+      font-weight: bold;
+      margin-bottom: 3px;
+    }
+
+    .achievement-desc {
+      font-size: 12px;
+      color: #94a3b8;
+    }
+
+    .achievement-progress {
+      font-size: 11px;
+      color: #64748b;
+      margin-top: 5px;
+    }
+
+    /* Notification de succès */
+    .achievement-notification {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: linear-gradient(135deg, #22c55e, #16a34a);
+      border: 3px solid #4ade80;
+      border-radius: 12px;
+      padding: 15px 20px;
+      display: none;
+      align-items: center;
+      gap: 12px;
+      z-index: 2000;
+      box-shadow: 0 0 30px rgba(34, 197, 94, 0.6);
+      animation: slideIn 0.5s ease-out;
+    }
+
+    .achievement-notification.show {
+      display: flex;
+    }
+
+    @keyframes slideIn {
+      from {
+        transform: translateX(400px);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    .notif-icon {
+      font-size: 32px;
+    }
+
+    .notif-text {
+      color: white;
+    }
+
+    .notif-title {
+      font-weight: bold;
+      font-size: 14px;
+      margin-bottom: 3px;
+    }
+
+    .notif-desc {
+      font-size: 12px;
+      opacity: 0.9;
+    }
+
+    /* Bouton de personnalisation */
+    #customize-btn {
+      background: linear-gradient(135deg, #a855f7, #9333ea);
+      border-color: #c084fc;
+    }
+
+    #customize-btn:active {
+      background: linear-gradient(135deg, #c084fc, #a855f7);
+    }
+
+    /* Bouton de partage */
+    #share-btn {
+      background: linear-gradient(135deg, #06b6d4, #0891b2);
+      border-color: #22d3ee;
+    }
+
+    #share-btn:active {
+      background: linear-gradient(135deg, #22d3ee, #06b6d4);
+    }
+
+    .stats-display {
+      background: rgba(15, 23, 42, 0.6);
+      border: 2px solid #1d4ed8;
+      border-radius: 12px;
+      padding: 15px;
+      margin-bottom: 20px;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .stat-box {
+      text-align: center;
+      padding: 10px;
+      background: rgba(29, 78, 216, 0.2);
+      border-radius: 8px;
+    }
+
+    .stat-box-value {
+      font-size: 20px;
+      color: #facc15;
+      font-weight: bold;
+    }
+
+    .stat-box-label {
+      font-size: 11px;
+      color: #94a3b8;
+      margin-top: 3px;
+    }
+
     .power-mini {
       background: rgba(15, 23, 42, 0.5);
       border: 1px solid rgba(29, 78, 216, 0.5);
@@ -748,15 +1085,350 @@
       </div>
 
       <div class="action-buttons">
-        <button class="action-btn" id="pause-btn-new">⏸ Pause</button>
+        <button class="action-btn" id="pause-btn-new">⏸</button>
         <button class="action-btn" id="restart-btn">🔄</button>
+      </div>
+      
+      <div class="action-buttons">
+        <button class="action-btn" id="customize-btn">🎨 Perso</button>
+        <button class="action-btn" id="share-btn">📤 Partager</button>
       </div>
     </div>
   </div>
 
   <div id="message"></div>
 
+  <!-- Menu de personnalisation -->
+  <div id="customization-menu">
+    <div class="menu-content">
+      <div class="menu-header">
+        <div class="menu-title">🎨 Personnalisation</div>
+        <button class="close-btn" id="close-menu">✕</button>
+      </div>
+
+      <!-- Statistiques -->
+      <div class="stats-display">
+        <div class="section-title">📊 Tes Statistiques</div>
+        <div class="stats-grid">
+          <div class="stat-box">
+            <div class="stat-box-value" id="total-score">0</div>
+            <div class="stat-box-label">Score Total</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-box-value" id="total-games">0</div>
+            <div class="stat-box-label">Parties Jouées</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-box-value" id="total-ghosts">0</div>
+            <div class="stat-box-label">Fantômes Mangés</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-box-value" id="achievements-count">0/10</div>
+            <div class="stat-box-label">Succès Débloqués</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Skins -->
+      <div class="menu-section">
+        <div class="section-title">👤 Skins Pac-Man</div>
+        <div class="skins-grid" id="skins-grid"></div>
+      </div>
+
+      <!-- Thèmes -->
+      <div class="menu-section">
+        <div class="section-title">🎨 Thèmes</div>
+        <div class="themes-grid" id="themes-grid"></div>
+      </div>
+
+      <!-- Succès -->
+      <div class="menu-section">
+        <div class="section-title">🏆 Succès</div>
+        <div class="achievements-list" id="achievements-list"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Notification de succès -->
+  <div class="achievement-notification" id="achievement-notif">
+    <div class="notif-icon">🏆</div>
+    <div class="notif-text">
+      <div class="notif-title" id="notif-title">Succès débloqué !</div>
+      <div class="notif-desc" id="notif-desc">Description</div>
+    </div>
+  </div>
+
   <script>
+    // ===== SYSTÈME DE PERSONNALISATION =====
+    const gameData = {
+      skins: [
+        { id: 'classic', icon: '🟡', name: 'Classique', unlocked: true },
+        { id: 'robot', icon: '🤖', name: 'Robot', unlocked: false, requirement: 'score500' },
+        { id: 'alien', icon: '👽', name: 'Alien', unlocked: false, requirement: 'ghosts20' },
+        { id: 'ninja', icon: '🥷', name: 'Ninja', unlocked: false, requirement: 'level5' },
+        { id: 'pirate', icon: '🏴‍☠️', name: 'Pirate', unlocked: false, requirement: 'games10' },
+        { id: 'astronaut', icon: '👨‍🚀', name: 'Astronaute', unlocked: false, requirement: 'score1000' },
+        { id: 'vampire', icon: '🧛', name: 'Vampire', unlocked: false, requirement: 'ghosts50' },
+        { id: 'wizard', icon: '🧙', name: 'Mage', unlocked: false, requirement: 'achievements5' },
+      ],
+      themes: [
+        { id: 'classic', name: 'Classique', colors: { bg: '#020617', wall: '#1d4ed8', dot: '#facc15' } },
+        { id: 'cyberpunk', name: 'Cyberpunk', colors: { bg: '#0a0118', wall: '#ff00ff', dot: '#00ffff' } },
+        { id: 'forest', name: 'Forêt', colors: { bg: '#0f2027', wall: '#2ecc71', dot: '#f39c12' } },
+        { id: 'sunset', name: 'Coucher', colors: { bg: '#1a1034', wall: '#ff6b6b', dot: '#ffd93d' } },
+        { id: 'ocean', name: 'Océan', colors: { bg: '#001220', wall: '#0891b2', dot: '#fbbf24' } },
+      ],
+      achievements: [
+        { id: 'first_game', icon: '🎮', name: 'Première Partie', desc: 'Jouer ta première partie', progress: 0, max: 1, unlocked: false },
+        { id: 'score500', icon: '⭐', name: 'Score 500', desc: 'Atteindre 500 points', progress: 0, max: 500, unlocked: false },
+        { id: 'score1000', icon: '🌟', name: 'Score 1000', desc: 'Atteindre 1000 points', progress: 0, max: 1000, unlocked: false },
+        { id: 'ghosts20', icon: '👻', name: 'Chasseur', desc: 'Manger 20 fantômes', progress: 0, max: 20, unlocked: false },
+        { id: 'ghosts50', icon: '💀', name: 'Exterminateur', desc: 'Manger 50 fantômes', progress: 0, max: 50, unlocked: false },
+        { id: 'level5', icon: '🚀', name: 'Niveau 5', desc: 'Atteindre le niveau 5', progress: 0, max: 5, unlocked: false },
+        { id: 'games10', icon: '🎯', name: 'Persévérant', desc: 'Jouer 10 parties', progress: 0, max: 10, unlocked: false },
+        { id: 'combo4', icon: '🔥', name: 'Combo Master', desc: 'Manger 4 fantômes d\'affilée', progress: 0, max: 1, unlocked: false },
+        { id: 'speedster', icon: '⚡', name: 'Speedster', desc: 'Utiliser 10 power-ups vitesse', progress: 0, max: 10, unlocked: false },
+        { id: 'achievements5', icon: '🏆', name: 'Collectionneur', desc: 'Débloquer 5 succès', progress: 0, max: 5, unlocked: false },
+      ]
+    };
+
+    let playerStats = {
+      currentSkin: 'classic',
+      currentTheme: 'classic',
+      totalScore: 0,
+      totalGames: 0,
+      totalGhosts: 0,
+      highestLevel: 1,
+      speedPowerUps: 0,
+    };
+
+    // Charger les données sauvegardées
+    function loadGameData() {
+      const saved = localStorage.getItem('pacmanPlayerData');
+      if (saved) {
+        const data = JSON.parse(saved);
+        playerStats = { ...playerStats, ...data.stats };
+        gameData.skins = data.skins || gameData.skins;
+        gameData.achievements = data.achievements || gameData.achievements;
+      }
+    }
+
+    // Sauvegarder les données
+    function saveGameData() {
+      localStorage.setItem('pacmanPlayerData', JSON.stringify({
+        stats: playerStats,
+        skins: gameData.skins,
+        achievements: gameData.achievements
+      }));
+    }
+
+    // Vérifier et débloquer les skins
+    function checkSkinUnlocks() {
+      gameData.skins.forEach(skin => {
+        if (skin.unlocked) return;
+        
+        let shouldUnlock = false;
+        switch(skin.requirement) {
+          case 'score500':
+            shouldUnlock = playerStats.totalScore >= 500;
+            break;
+          case 'score1000':
+            shouldUnlock = playerStats.totalScore >= 1000;
+            break;
+          case 'ghosts20':
+            shouldUnlock = playerStats.totalGhosts >= 20;
+            break;
+          case 'ghosts50':
+            shouldUnlock = playerStats.totalGhosts >= 50;
+            break;
+          case 'level5':
+            shouldUnlock = playerStats.highestLevel >= 5;
+            break;
+          case 'games10':
+            shouldUnlock = playerStats.totalGames >= 10;
+            break;
+          case 'achievements5':
+            shouldUnlock = gameData.achievements.filter(a => a.unlocked).length >= 5;
+            break;
+        }
+        
+        if (shouldUnlock) {
+          skin.unlocked = true;
+          showNotification('🎉 Nouveau Skin Débloqué !', `${skin.icon} ${skin.name}`);
+        }
+      });
+    }
+
+    // Vérifier et débloquer les succès
+    function checkAchievements() {
+      gameData.achievements.forEach(achievement => {
+        if (achievement.unlocked) return;
+        
+        let newProgress = achievement.progress;
+        
+        switch(achievement.id) {
+          case 'first_game':
+            newProgress = Math.min(playerStats.totalGames, 1);
+            break;
+          case 'score500':
+            newProgress = Math.min(playerStats.totalScore, 500);
+            break;
+          case 'score1000':
+            newProgress = Math.min(playerStats.totalScore, 1000);
+            break;
+          case 'ghosts20':
+            newProgress = Math.min(playerStats.totalGhosts, 20);
+            break;
+          case 'ghosts50':
+            newProgress = Math.min(playerStats.totalGhosts, 50);
+            break;
+          case 'level5':
+            newProgress = Math.min(playerStats.highestLevel, 5);
+            break;
+          case 'games10':
+            newProgress = Math.min(playerStats.totalGames, 10);
+            break;
+          case 'speedster':
+            newProgress = Math.min(playerStats.speedPowerUps, 10);
+            break;
+          case 'achievements5':
+            newProgress = Math.min(gameData.achievements.filter(a => a.unlocked).length, 5);
+            break;
+        }
+        
+        achievement.progress = newProgress;
+        
+        if (newProgress >= achievement.max && !achievement.unlocked) {
+          achievement.unlocked = true;
+          showNotification(`🏆 ${achievement.name}`, achievement.desc);
+        }
+      });
+    }
+
+    // Afficher une notification
+    function showNotification(title, desc) {
+      const notif = document.getElementById('achievement-notif');
+      document.getElementById('notif-title').textContent = title;
+      document.getElementById('notif-desc').textContent = desc;
+      notif.classList.add('show');
+      
+      setTimeout(() => {
+        notif.classList.remove('show');
+      }, 4000);
+    }
+
+    // Appliquer le thème
+    function applyTheme(themeId) {
+      const theme = gameData.themes.find(t => t.id === themeId);
+      if (!theme) return;
+      
+      playerStats.currentTheme = themeId;
+      document.documentElement.style.setProperty('--theme-bg', theme.colors.bg);
+      document.documentElement.style.setProperty('--theme-wall', theme.colors.wall);
+      document.documentElement.style.setProperty('--theme-dot', theme.colors.dot);
+      
+      saveGameData();
+    }
+
+    // Mettre à jour l'interface du menu
+    function updateCustomizationMenu() {
+      // Statistiques
+      document.getElementById('total-score').textContent = playerStats.totalScore.toLocaleString();
+      document.getElementById('total-games').textContent = playerStats.totalGames;
+      document.getElementById('total-ghosts').textContent = playerStats.totalGhosts;
+      const unlockedCount = gameData.achievements.filter(a => a.unlocked).length;
+      document.getElementById('achievements-count').textContent = `${unlockedCount}/${gameData.achievements.length}`;
+      
+      // Skins
+      const skinsGrid = document.getElementById('skins-grid');
+      skinsGrid.innerHTML = '';
+      gameData.skins.forEach(skin => {
+        const div = document.createElement('div');
+        div.className = `skin-item ${skin.id === playerStats.currentSkin ? 'active' : ''} ${!skin.unlocked ? 'locked' : ''}`;
+        div.innerHTML = `
+          ${!skin.unlocked ? '<span class="lock-icon">🔒</span>' : ''}
+          <div class="skin-icon">${skin.icon}</div>
+          <div class="skin-name">${skin.name}</div>
+        `;
+        if (skin.unlocked) {
+          div.onclick = () => {
+            playerStats.currentSkin = skin.id;
+            saveGameData();
+            updateCustomizationMenu();
+          };
+        }
+        skinsGrid.appendChild(div);
+      });
+      
+      // Thèmes
+      const themesGrid = document.getElementById('themes-grid');
+      themesGrid.innerHTML = '';
+      gameData.themes.forEach(theme => {
+        const div = document.createElement('div');
+        div.className = `theme-item ${theme.id === playerStats.currentTheme ? 'active' : ''}`;
+        div.innerHTML = `
+          <div class="theme-preview" style="background: linear-gradient(135deg, ${theme.colors.bg}, ${theme.colors.wall})"></div>
+          <div class="theme-name">${theme.name}</div>
+        `;
+        div.onclick = () => applyTheme(theme.id);
+        themesGrid.appendChild(div);
+      });
+      
+      // Succès
+      const achievementsList = document.getElementById('achievements-list');
+      achievementsList.innerHTML = '';
+      gameData.achievements.forEach(achievement => {
+        const div = document.createElement('div');
+        div.className = `achievement-item ${achievement.unlocked ? 'unlocked' : ''}`;
+        const progressText = achievement.unlocked ? '✅ Débloqué' : `${achievement.progress}/${achievement.max}`;
+        div.innerHTML = `
+          <div class="achievement-icon">${achievement.icon}</div>
+          <div class="achievement-info">
+            <div class="achievement-name">${achievement.name}</div>
+            <div class="achievement-desc">${achievement.desc}</div>
+            <div class="achievement-progress">${progressText}</div>
+          </div>
+        `;
+        achievementsList.appendChild(div);
+      });
+    }
+
+    // Partager le score
+    function shareScore() {
+      const text = `🎮 J'ai marqué ${score} points au Pac-Man ! Niveau ${level} 🏆\n\nBattez mon score : https://urlr.me/ebMSPR`;
+      
+      if (navigator.share) {
+        navigator.share({
+          title: 'Mon score Pac-Man',
+          text: text,
+        }).catch(() => {});
+      } else {
+        // Copier dans le presse-papier
+        navigator.clipboard.writeText(text).then(() => {
+          showNotification('📋 Copié !', 'Score copié dans le presse-papier');
+        }).catch(() => {
+          alert(text);
+        });
+      }
+    }
+
+    // Events du menu
+    document.getElementById('customize-btn').addEventListener('click', () => {
+      document.getElementById('customization-menu').classList.add('active');
+      updateCustomizationMenu();
+    });
+
+    document.getElementById('close-menu').addEventListener('click', () => {
+      document.getElementById('customization-menu').classList.remove('active');
+    });
+
+    document.getElementById('share-btn').addEventListener('click', shareScore);
+
+    // Charger les données au démarrage
+    loadGameData();
+    applyTheme(playerStats.currentTheme);
+
+    // ===== CODE DU JEU ORIGINAL =====
     const canvas = document.getElementById("canvas");
     const ctx = canvas.getContext("2d");
     const scoreEl = document.getElementById("score-value");
@@ -1118,6 +1790,7 @@
               pacman.speed = 2;
               pacman.powerTimer = powerUp.duration;
               messageEl.textContent = `🚀 ${powerUp.name} activée !`;
+              playerStats.speedPowerUps++;
               break;
               
             case 5:
@@ -1196,6 +1869,10 @@
       const centerX = pacman.col * tileSize + tileSize / 2;
       const centerY = pacman.row * tileSize + tileSize / 2;
 
+      // Récupérer le skin actuel
+      const currentSkin = gameData.skins.find(s => s.id === playerStats.currentSkin);
+      const useSkinIcon = currentSkin && currentSkin.icon !== '🟡';
+
       let angleStart = 0;
       let angleEnd = Math.PI * 2;
 
@@ -1247,23 +1924,35 @@
         ctx.shadowColor = "#facc15";
       }
 
-      ctx.fillStyle = "#facc15";
-      ctx.beginPath();
-      ctx.moveTo(centerX, centerY);
-      ctx.arc(centerX, centerY, pacman.radius, angleStart, angleEnd, false);
-      ctx.closePath();
-      ctx.fill();
+      // Dessiner le skin ou le cercle classique
+      if (useSkinIcon) {
+        // Utiliser emoji/icône
+        ctx.font = `${pacman.radius * 2}px Arial`;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(currentSkin.icon, centerX, centerY);
+      } else {
+        // Dessin classique
+        ctx.fillStyle = "#facc15";
+        ctx.beginPath();
+        ctx.moveTo(centerX, centerY);
+        ctx.arc(centerX, centerY, pacman.radius, angleStart, angleEnd, false);
+        ctx.closePath();
+        ctx.fill();
+        
+        ctx.shadowBlur = 0;
+
+        if (pacman.dir.x !== 0 || pacman.dir.y !== 0) {
+          ctx.fillStyle = "#0f172a";
+          const eyeX = centerX + (pacman.dir.x * 4) + (pacman.dir.y === -1 ? 0 : 3);
+          const eyeY = centerY + (pacman.dir.y * 4) + (pacman.dir.x !== 0 ? -5 : 0);
+          ctx.beginPath();
+          ctx.arc(eyeX, eyeY, 2, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
       
       ctx.shadowBlur = 0;
-
-      if (pacman.dir.x !== 0 || pacman.dir.y !== 0) {
-        ctx.fillStyle = "#0f172a";
-        const eyeX = centerX + (pacman.dir.x * 4) + (pacman.dir.y === -1 ? 0 : 3);
-        const eyeY = centerY + (pacman.dir.y * 4) + (pacman.dir.x !== 0 ? -5 : 0);
-        ctx.beginPath();
-        ctx.arc(eyeX, eyeY, 2, 0, Math.PI * 2);
-        ctx.fill();
-      }
     }
 
     function getChaseTarget(ghost) {
@@ -1349,10 +2038,21 @@
       if (!gameOver && ghost.row === pacman.row && ghost.col === pacman.col) {
         if (pacman.powered) {
           ghostsEaten++;
+          playerStats.totalGhosts++;
           sounds.eatGhost(ghostsEaten);
           ghost.row = 5;
           ghost.col = 7;
           ghost.color = ghost.baseColor;
+          
+          // Vérifier le succès combo
+          if (ghostsEaten >= 4) {
+            const comboAchievement = gameData.achievements.find(a => a.id === 'combo4');
+            if (comboAchievement && !comboAchievement.unlocked) {
+              comboAchievement.progress = 1;
+              comboAchievement.unlocked = true;
+              showNotification('🔥 Combo Master', 'Tous les fantômes mangés !');
+            }
+          }
         } else if (pacman.shield) {
           ghost.row = ghost.row - ghost.dir.y;
           ghost.col = ghost.col - ghost.dir.x;
@@ -1365,6 +2065,18 @@
           if (lives <= 0) {
             gameOver = true;
             messageEl.textContent = "💀 GAME OVER ! Appuie sur 🔄 pour réessayer";
+            
+            // Mettre à jour les statistiques
+            playerStats.totalScore += score;
+            playerStats.totalGames++;
+            if (level > playerStats.highestLevel) {
+              playerStats.highestLevel = level;
+            }
+            
+            // Vérifier succès et skins
+            checkAchievements();
+            checkSkinUnlocks();
+            saveGameData();
           } else {
             sounds.death();
             pacman.row = 5;
