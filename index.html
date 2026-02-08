@@ -19,12 +19,13 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: space-between;
+      justify-content: flex-start;
       font-family: 'Courier New', monospace;
       background: radial-gradient(circle at top, #020617, #0f172a);
       color: #e5e7eb;
-      overflow: hidden;
-      padding: 10px;
+      overflow-x: hidden;
+      overflow-y: auto;
+      padding: 5px;
     }
 
     h1 {
@@ -91,7 +92,6 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      flex-grow: 1;
       justify-content: center;
     }
 
@@ -106,7 +106,8 @@
     canvas {
       background: #020617;
       display: block;
-      max-width: 100%;
+      width: 100%;
+      max-width: 448px;
       height: auto;
     }
 
@@ -132,12 +133,14 @@
     }
 
     #message {
-      margin: 10px 0;
-      font-size: 14px;
-      min-height: 20px;
+      margin: 5px 0;
+      font-size: 12px;
+      min-height: 18px;
       color: #facc15;
       font-weight: bold;
       text-align: center;
+      order: 4;
+      width: 100%;
     }
 
     #game-layout {
@@ -148,6 +151,7 @@
       width: 100%;
       max-width: 1000px;
       margin-top: 10px;
+      flex: 1;
     }
 
     #powers-info {
@@ -239,6 +243,17 @@
       transform: translateY(2px);
     }
 
+    #fullscreen-btn {
+      width: 100%;
+      margin-top: 10px;
+      background: linear-gradient(135deg, #16a34a, #22c55e);
+      border-color: #4ade80;
+    }
+
+    #fullscreen-btn:active {
+      background: linear-gradient(135deg, #22c55e, #4ade80);
+    }
+
     .power-mini {
       background: rgba(15, 23, 42, 0.5);
       border: 1px solid rgba(29, 78, 216, 0.5);
@@ -298,51 +313,160 @@
 
     /* Responsive mobile */
     @media (max-width: 768px) {
+      body {
+        padding: 5px;
+      }
+
+      h1 {
+        font-size: 18px;
+        margin: 5px 0;
+      }
+
+      #stats {
+        gap: 5px;
+        margin-bottom: 5px;
+      }
+
+      .stat {
+        padding: 4px 6px;
+      }
+
+      .stat-label {
+        font-size: 9px;
+      }
+
+      .stat-value {
+        font-size: 13px;
+      }
+
+      .life-icon {
+        width: 12px;
+        height: 12px;
+      }
+
       #game-layout {
         flex-direction: column;
         align-items: center;
+        gap: 10px;
+        width: 100%;
       }
 
       #powers-info {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 8px;
+        gap: 5px;
         width: 100%;
-        max-width: 400px;
-        margin-bottom: 15px;
+        max-width: 100%;
+        order: 3;
+      }
+
+      #fullscreen-btn {
+        grid-column: 1 / -1;
+        margin-top: 5px;
+      }
+
+      .power-mini {
+        padding: 6px;
+        font-size: 10px;
+      }
+
+      .power-mini-icon {
+        font-size: 16px;
+      }
+
+      .power-mini-name {
+        font-size: 10px;
+      }
+
+      .power-mini-duration {
+        font-size: 8px;
+      }
+
+      #game-container {
+        order: 1;
+        width: 100%;
+      }
+
+      canvas {
+        max-width: 100%;
       }
 
       #controls-mobile {
         width: 100%;
-        max-width: 400px;
-        margin-top: 15px;
+        max-width: 100%;
+        padding: 10px;
+        order: 2;
+      }
+
+      #dpad {
+        gap: 6px;
+        max-width: 180px;
+      }
+
+      .dpad-btn {
+        width: 55px;
+        height: 55px;
+        font-size: 22px;
+      }
+
+      .action-buttons {
+        margin-top: 8px;
+      }
+
+      .action-btn {
+        padding: 8px 16px;
+        font-size: 13px;
+      }
+
+      #message {
+        font-size: 12px;
+        margin: 5px 0;
+      }
+    }
+
+    /* Très petits écrans */
+    @media (max-width: 400px) {
+      h1 {
+        font-size: 16px;
+      }
+
+      #dpad {
+        max-width: 160px;
+      }
+
+      .dpad-btn {
+        width: 48px;
+        height: 48px;
+        font-size: 20px;
+      }
+
+      .stat-label {
+        font-size: 8px;
+      }
+
+      .stat-value {
+        font-size: 12px;
       }
     }
 
     /* Orientation paysage */
     @media screen and (orientation: landscape) and (max-height: 500px) {
       body {
-        flex-direction: row;
+        flex-direction: column;
         padding: 5px;
+        overflow-y: auto;
       }
 
       h1 {
-        position: absolute;
-        top: 5px;
-        left: 50%;
-        transform: translateX(-50%);
-        font-size: 18px;
-        margin: 0;
+        font-size: 16px;
+        margin: 5px 0;
       }
 
       #stats {
-        position: absolute;
-        top: 35px;
-        left: 50%;
-        transform: translateX(-50%);
         grid-template-columns: repeat(4, 1fr);
-        max-width: 500px;
+        max-width: 100%;
         gap: 5px;
+        margin-bottom: 5px;
       }
 
       .stat {
@@ -357,46 +481,70 @@
         font-size: 12px;
       }
 
-      #game-container {
-        margin-top: 70px;
-      }
-
-      #game {
-        max-height: calc(100vh - 80px);
-      }
-
-      canvas {
-        max-height: calc(100vh - 80px);
-      }
-
-      #controls-mobile {
-        position: fixed;
-        bottom: 5px;
-        right: 5px;
-        max-width: 250px;
-        padding: 10px;
-      }
-
-      #dpad {
-        gap: 5px;
-        max-width: 160px;
-      }
-
-      .dpad-btn {
-        width: 50px;
-        height: 50px;
-        font-size: 20px;
+      #game-layout {
+        flex-direction: row;
+        gap: 10px;
+        width: 100%;
       }
 
       #powers-info {
-        display: none;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        min-width: 140px;
+        max-width: 140px;
+        order: 1;
+      }
+
+      .power-mini {
+        padding: 5px;
+        font-size: 9px;
+      }
+
+      .power-mini-icon {
+        font-size: 14px;
+      }
+
+      #game-container {
+        order: 2;
+        flex: 1;
+      }
+
+      #game {
+        max-height: calc(100vh - 120px);
+      }
+
+      canvas {
+        max-height: calc(100vh - 120px);
+        width: auto;
+        max-width: 100%;
+      }
+
+      #controls-mobile {
+        max-width: 200px;
+        padding: 8px;
+        order: 3;
+      }
+
+      #dpad {
+        gap: 4px;
+        max-width: 150px;
+      }
+
+      .dpad-btn {
+        width: 45px;
+        height: 45px;
+        font-size: 18px;
+      }
+
+      .action-btn {
+        padding: 6px 12px;
+        font-size: 11px;
       }
 
       #message {
-        position: absolute;
-        bottom: 5px;
-        left: 5px;
-        font-size: 12px;
+        font-size: 11px;
+        margin: 5px 0;
       }
     }
   </style>
@@ -454,6 +602,7 @@
           <span class="power-mini-duration">5s</span>
         </div>
       </div>
+      <button class="action-btn" id="fullscreen-btn">📱 Plein écran</button>
     </div>
 
     <!-- Jeu au centre -->
@@ -1288,6 +1437,38 @@
       level = 1;
       lives = 3;
       init();
+    });
+
+    // Bouton Plein écran
+    const fullscreenBtn = document.getElementById('fullscreen-btn');
+    fullscreenBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      toggleFullscreen();
+    });
+    fullscreenBtn.addEventListener('touchstart', (e) => {
+      e.preventDefault();
+      toggleFullscreen();
+    });
+
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(err => {
+          console.log('Erreur plein écran:', err);
+        });
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        }
+      }
+    }
+
+    // Mettre à jour le texte du bouton selon l'état
+    document.addEventListener('fullscreenchange', () => {
+      if (document.fullscreenElement) {
+        fullscreenBtn.textContent = '📱 Quitter plein écran';
+      } else {
+        fullscreenBtn.textContent = '📱 Plein écran';
+      }
     });
 
     // Support clavier pour desktop
