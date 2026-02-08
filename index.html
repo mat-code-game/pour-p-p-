@@ -1193,6 +1193,7 @@
     };
 
     let playerStats = {
+      pseudo: null,
       currentSkin: 'classic',
       currentTheme: 'classic',
       totalScore: 0,
@@ -1204,14 +1205,37 @@
 
     // Charger les données sauvegardées
     function loadGameData() {
-      const saved = localStorage.getItem('pacmanPlayerData');
-      if (saved) {
-        const data = JSON.parse(saved);
-        playerStats = { ...playerStats, ...data.stats };
-        gameData.skins = data.skins || gameData.skins;
-        gameData.achievements = data.achievements || gameData.achievements;
-      }
+  const saved = localStorage.getItem("pacmanPlayerData");
+  if (saved) {
+    const data = JSON.parse(saved);
+    playerStats = {
+      ...playerStats,
+      ...data.stats,
+    };
+    gameData.skins = data.skins;
+    gameData.achievements = data.achievements;
+  }
+}
+
+    function askPseudo() {
+  let pseudo = prompt("Choisis ton pseudo :");
+  if (pseudo) {
+    pseudo = pseudo.trim();
+    if (pseudo.length > 0) {
+      playerStats.pseudo = pseudo;
+      saveGameData();
     }
+  }
+}
+
+loadGameData();
+if (!playerStats.pseudo) {
+  askPseudo();
+}
+applyTheme(playerStats.currentTheme);
+
+    
+
 
     // Sauvegarder les données
     function saveGameData() {
