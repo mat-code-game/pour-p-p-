@@ -2439,7 +2439,7 @@
           return;
         }
 
-        ghost.stepTimer += delta;
+        ghost.stepTimer += delta/2.;
         const delay = pacman.powered ? ghostStepDelay * 1.5 : ghostStepDelay;
 
         if (ghost.stepTimer >= delay) {
@@ -2624,7 +2624,7 @@
 
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         drawMap();
-        updatePacman(delta);
+        updatePacman(delta*0.75);
         ghosts.forEach((ghost) => updateGhost(ghost, delta));
         drawPacman();
         ghosts.forEach((ghost) => drawGhost(ghost));
