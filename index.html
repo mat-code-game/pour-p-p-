@@ -1970,6 +1970,7 @@
         },
       };
 
+      const pacmanSpeed = { normal: 0.5 , powered: 2, frozen: 0.005, };
       function init() {
         currentMap = JSON.parse(
           JSON.stringify(maps[Math.min(level - 1, maps.length - 1)]),
@@ -1999,7 +2000,7 @@
         pacman.nextDir = { x: 0, y: 0 };
         pacman.powered = false;
         pacman.powerTimer = 0;
-        pacman.speed = 1;
+        pacman.speed = pacmanSpeed.normal;
         pacman.shield = false;
         pacman.freeze = false;
 
@@ -2196,7 +2197,7 @@
             const powerUp = powerUpTypes[tile];
 
             pacman.powered = false;
-            pacman.speed = 1;
+            pacman.speed = pacmanSpeed.normal;
             pacman.shield = false;
             pacman.freeze = false;
 
@@ -2210,7 +2211,7 @@
                 break;
 
               case 4:
-                pacman.speed = 2;
+                pacman.speed = pacmanSpeed.powered;
                 pacman.powerTimer = powerUp.duration;
                 messageEl.textContent = `🚀 ${powerUp.name} activée !`;
                 playerStats.speedPowerUps++;
@@ -2274,7 +2275,7 @@
               pacman.powered = false;
               ghosts.forEach((ghost) => (ghost.color = ghost.baseColor));
             }
-            pacman.speed = 1;
+            pacman.speed = pacmanSpeed.normal;
             pacman.shield = false;
             pacman.freeze = false;
           }
@@ -2326,7 +2327,7 @@
           ctx.shadowBlur = 0;
         }
 
-        if (pacman.speed > 1) {
+        if (pacman.speed > pacmanSpeed.normal) {
           ctx.strokeStyle = "#22c55e";
           ctx.lineWidth = 2;
           ctx.globalAlpha = 0.5;
@@ -2522,7 +2523,7 @@
               pacman.dir = { x: 0, y: 0 };
               pacman.nextDir = { x: 0, y: 0 };
               pacman.powered = false;
-              pacman.speed = 1;
+              pacman.speed = pacmanSpeed.normal;
               pacman.shield = false;
               pacman.freeze = false;
               pacman.powerTimer = 0;
@@ -2624,7 +2625,7 @@
 
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         drawMap();
-        updatePacman(delta*0.75);
+        updatePacman(delta);
         ghosts.forEach((ghost) => updateGhost(ghost, delta));
         drawPacman();
         ghosts.forEach((ghost) => drawGhost(ghost));
